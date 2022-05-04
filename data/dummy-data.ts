@@ -53,3 +53,5 @@ const DUMMY_EVENTS = [
   export function getEventById(id: string) {
     return DUMMY_EVENTS.find((event) => event.id === id);
   }
+
+  // 'https://dummy-de406-default-rtdb.firebaseio.com/dummyData.json'

@@ -3,18 +3,37 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import { getFeaturedEvents } from "../data/dummy-data";
+import { getFeaturedEvents } from "../helpers/api-utils";
 import EventList from "../components/events/event-list";
+import { GetStaticProps } from "next";
 
-const Home: NextPage = () => {
-  const featuredEvents = getFeaturedEvents();
-  
+const Home: NextPage<{}, {}> = (props: {
+  events: {
+    title: string;
+    image: string;
+    date: string;
+    location: string;
+    id: string;
+    isFeatured: boolean;
+  }[];
+}) => {
+  // const featuredEvents = getFeaturedEvents();
+
   return (
     <div className={styles.container}>
       <h1>Recent Events</h1>
-      <EventList items={featuredEvents} />
+      <EventList items={props.events} />
     </div>
   );
 };
 
+export const getStaticProps: GetStaticProps = async () => {
+  // ...
+  const featuredEvents = await getFeaturedEvents();
+  return {
+    props: {
+      events: featuredEvents,
+    },
+  };
+};
 export default Home;
