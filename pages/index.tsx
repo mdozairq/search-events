@@ -7,7 +7,7 @@ import { getFeaturedEvents } from "../helpers/api-utils";
 import EventList from "../components/events/event-list";
 import { GetStaticProps } from "next";
 
-const Home: NextPage<{}, {}> = (props: {
+const Home: NextPage = (props: {
   events: {
     title: string;
     image: string;
@@ -21,7 +21,12 @@ const Home: NextPage<{}, {}> = (props: {
 
   return (
     <div className={styles.container}>
-      <h1>Recent Events</h1>
+      <Head>
+        <title>Featured Events</title>
+        <meta name='description' 
+        content='Find lot of Great Events that allow you to evolve...' />
+      </Head>
+      <h1>Featured Events</h1>
       <EventList items={props.events} />
     </div>
   );
